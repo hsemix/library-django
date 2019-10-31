@@ -1,0 +1,45 @@
+{% extends 'library/layout.html' %}
+
+{% block main %}
+    <div class="panel panel-default">
+        <div class="panel-heading main-color-bg">
+            <h3 class="panel-title">Register Buyer</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12 form-container">
+                
+                    <form action="{% url 'buyer.new' %}" method="post" onsubmit="Library.Forms.submitForm(this); return false;">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input type="text" name="first_name" class="form-control" placeholder="First Name" id="first_name" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" name="last_name" class="form-control" placeholder="Last Name" id="last_name" value="">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" name="phone" class="form-control" placeholder="phone" id="phone" value="" />
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label><input type="radio" name="gender"> Female?</label>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label><input type="radio" name="gender"> Male?</label>
+                            </div>
+                        </div>
+                        
+                        <input type="submit" class="btn btn-primary col-sm-12" value="Save" />
+                        <div class="clearfix"></div><br />
+                        <div class="alert hidden">Success Message</div>
+                    </form>
+                </div>
+            </div>
+                
+        </div>
+    </div>
+{% endblock%}

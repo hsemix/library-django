@@ -1,0 +1,147 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--link rel="icon" href="favicon.ico"-->
+
+    <title>Admin Area | {{ title }}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static '/stylesheets/library.css' %} " rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Movie Library Manager</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="nav-item {% if active == 'dashboard' %}active{% endif %}">
+              <a href="/home" class="nav-link">Dashboard <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item {% if active == 'new_movie' %}active{% endif %}">
+              <a class="nav-link" href="/movie/new">Register New Movie</a>
+            </li>
+            <li class="nav-item {% if active == 'new_buyer' %}active{% endif %}">
+              <a class="nav-link" href="/buyer/new">Register New Buyer</a>
+            </li>
+            <li class="nav-item {% if active == 'new_admin' %}active{% endif %}">
+              <a class="nav-link" href="/user/new">Register New Admin</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Welcome {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    
+    <header id="header">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-md-10 col-sm-12">
+    				<h1><span class="glyphicon glyphicon-cog" arial-hidden="true"></span> {{ page }} <small>Manage Your Library</small></h1>
+    			</div>
+    			<div class="col-md-2">
+            <div class="dropdown create">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Create Content
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><button type="button" class="btn btn-primary col-sm-12" data-toggle="modal" data-target="#addPage">Add Subject</button></li>
+                <!--li><a href="#">Add Post</a></li>
+                <li><a href="#">Add User</a></li-->
+              </ul>
+            </div>
+    			</div>
+    		</div>
+    	</div>
+    </header>
+
+    <section id="breadcrumb">
+        <div class="container">
+          <ol class="breadcrumb">
+            <li class="active">Dashboard</li>
+          </ol>
+        </div>
+    </section>
+    <section id="main">
+        <div class="container">
+            <div class="row">
+                
+                <!-- left start -->
+                <div class="col-md-3 col-sm-12">
+
+                    <div class="list-group">
+                        <a href="#" class="list-group-item active main-color-bg">
+                            <span class="glyphicon glyphicon-cog" arial-hidden="true"></span> Browse By Movies
+                        </a>
+                        
+                        <a href="" onclicks="Library.SubjectController.load(this); return false;" class="list-group-item subject-link"><span class="glyphicon glyphicon-list-alt" arial-hidden="true"></span> Movie Name <span class="badge">48</span></a>
+                        
+                    </div>
+                    
+                    <div class="list-group">
+                        <a href="" class="list-group-item active main-color-bg">
+                            <span class="glyphicon glyphicon-cog" arial-hidden="true"></span> Recent Customers
+                        </a>
+                        <form action="" method="post" class="list-group-item" style="margin:0;">
+                            <div class="row">
+                            <div class="col-md-12 input-group">
+                                <input type="text" name="search_term" id="" class="form-control" placeholder="Filter Customers...">
+                                <span class="input-group-addon"><button type="submit"><span class="glyphicon glyphicon-search" arial-hidden="true"></span></button></span>
+                            </div>
+                            </div>
+                        </form>
+                        
+                        <a href="" class="list-group-item"><span class="glyphicon glyphicon-user" arial-hidden="true"></span> Customer fullname <span class="badge">89</span></a>
+                        
+                    </div>
+                    
+                </div>
+                <!-- left end -->
+              
+                <div class="col-md-9 col-sm-12" id="main-content">
+                    {% block main %}
+                    {% endblock %}                
+                </div>
+    
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <p>Copyright Movie Library &copy; 2019</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="{% static '/javascripts/app.js' %}"></script>
+  
+</body>
+</html>
